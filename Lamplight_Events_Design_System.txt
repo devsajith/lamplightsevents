@@ -1,0 +1,362 @@
+LAMPLIGHT EVENTS — WEBSITE DESIGN SYSTEM
+
+PROJECT
+Event stage decoration and event lighting business.
+Design direction: Premium, Elegant, Modern, Minimal, Event-focused.
+The photography and event designs should remain the visual focus.
+
+1. COLOR SYSTEM
+
+Primary / Charcoal:
+#111111
+
+Primary Text:
+#171717
+
+Secondary / Warm Gold:
+#C9A45C
+
+Page Background / Off-white:
+#FAF9F6
+
+Surface / White:
+#FFFFFF
+
+Secondary Text / Muted:
+#6B6B6B
+
+Border:
+#E8E5DF
+
+WhatsApp:
+#25D366
+
+COLOR USAGE
+- Use charcoal for primary navigation, headings, strong text, and dark sections.
+- Use warm gold as an accent for important highlights, decorative elements, active states, and selected CTAs.
+- Use off-white as the main page background where appropriate.
+- Use white for cards and clean content surfaces.
+- Use muted gray only for secondary/supporting text.
+- Use WhatsApp green only for WhatsApp-related actions.
+- Do not introduce unnecessary additional colors.
+
+2. TYPOGRAPHY
+
+Heading Font:
+Playfair Display
+
+Body Font:
+Inter
+
+HEADING SIZES — DESKTOP
+H1: 56–72px
+H2: 40–48px
+H3: 24–30px
+
+BODY
+Body: 16–18px
+Small text: 14px
+
+HEADING SIZES — MOBILE
+H1: 40–48px
+H2: 32–36px
+H3: 22–24px
+Body: 16px
+
+TYPOGRAPHY RULES
+- Playfair Display is used for major headings and premium visual statements.
+- Inter is used for body text, navigation, buttons, labels, and general UI.
+- Maintain clear hierarchy and readability.
+- Avoid excessive font weights and decorative typography.
+
+3. SPACING SYSTEM
+
+Use an 8px spacing system:
+
+4px
+8px
+16px
+24px
+32px
+48px
+64px
+80px
+96px
+
+SECTION SPACING
+- Desktop major sections: generally 80–120px vertical spacing.
+- Mobile sections: reduce spacing appropriately while maintaining visual breathing room.
+- Avoid inconsistent arbitrary spacing values.
+
+4. BUTTON SYSTEM
+
+PRIMARY BUTTON
+- Background: #C9A45C
+- Text: #111111
+- Height: 48–52px
+- Border radius: 6px
+- Use for primary business actions.
+
+SECONDARY BUTTON
+- Background: transparent
+- Border: #111111
+- Text: #111111
+- Height: 48–52px
+- Border radius: 6px
+
+WHATSAPP BUTTON
+- Background: #25D366
+- Text: #FFFFFF
+- Height: 48–52px
+- Border radius: 6px
+- Use specifically for WhatsApp enquiries.
+
+BUTTON RULES
+- Buttons should be clear and easy to understand.
+- Use concise action-oriented labels.
+- Avoid excessive button styles.
+- Maintain consistent height, padding, and radius.
+
+5. CARD SYSTEM
+
+CARD STYLE
+- Background: #FFFFFF
+- Border: 1px solid #E8E5DF
+- Border radius: 8px
+- Shadow: very subtle or none
+
+CARD RULES
+- Keep cards visually clean and minimal.
+- Event/stage/light photography should be the main focus.
+- Avoid heavy shadows, excessive borders, and excessive rounded corners.
+- Image cards may use 0–8px radius depending on the final layout.
+
+6. IMAGE SYSTEM
+
+IMAGE FORMAT:
+WebP
+
+IMAGE LOCATION:
+public/images/
+
+STRUCTURE:
+
+public/
+└── images/
+    ├── stages/
+    └── lights/
+
+IMAGE RULES
+- Use Next.js Image for responsive image delivery and optimization.
+- Use appropriate image dimensions/aspect ratios.
+- Provide meaningful alt text.
+- Avoid unnecessarily huge image files.
+- Use lazy loading where appropriate.
+- Maintain consistent image aspect ratios within galleries/cards.
+- Photography should dominate the visual experience.
+
+7. RESPONSIVE BREAKPOINTS
+
+Use Tailwind CSS standard breakpoints:
+
+Mobile:
+< 640px
+
+Tablet:
+640px–1024px
+
+Desktop:
+1024px+
+
+Large Desktop:
+1280px+
+
+RESPONSIVE RULES
+- Design mobile-first.
+- Navigation must work comfortably on small screens.
+- Images must remain visually strong on mobile.
+- Typography and section spacing should scale down appropriately.
+- Avoid horizontal scrolling.
+- Maintain accessible touch targets.
+
+8. BORDER RADIUS
+
+Default radius:
+6–8px
+
+Use moderate rounding only.
+Avoid excessive pill-shaped UI unless specifically appropriate.
+
+9. SHADOWS
+
+Use shadows sparingly.
+
+Preferred:
+- Very subtle card shadow
+- Subtle dropdown/modal shadow
+
+Avoid:
+- Heavy floating shadows
+- Excessive glow effects
+- Strong neumorphism-style shadows
+
+10. VISUAL STYLE
+
+Overall visual language:
+
+Premium
+Elegant
+Modern
+Minimal
+Professional
+Event-focused
+
+The website should feel like a professional event decoration company rather than a generic SaaS or corporate website.
+
+AVOID:
+- Excessive gradients
+- Too many colors
+- Heavy shadows
+- Excessive rounded cards
+- Excessive animations
+- Generic SaaS-style layouts
+- Unnecessary UI elements
+- Overly decorative effects that distract from event photography
+
+11. ANIMATION
+
+Animations should be subtle and purposeful.
+
+Preferred:
+- Smooth hover transitions
+- Gentle image scale on hover
+- Fade/slide entrance animations where appropriate
+- Smooth mobile menu transitions
+
+Avoid:
+- Excessive motion
+- Large parallax effects
+- Constant animated elements
+- Animations that affect usability or performance
+
+12. LAYOUT
+
+Use a clean responsive container.
+
+General principles:
+- Strong visual hierarchy
+- Generous whitespace
+- Consistent alignment
+- Clear section separation
+- Large, high-quality event photography
+- Simple navigation
+- Strong WhatsApp enquiry calls-to-action
+
+13. WEBSITE PAGES
+
+Home
+- Hero
+- Featured Stage Designs
+- Featured Lighting
+- Services
+- Why Choose Us
+- WhatsApp CTA
+- Footer
+
+About
+- Company introduction
+- Experience/background
+- Services
+- Trust/quality points
+- WhatsApp CTA
+
+Stages
+- Stage design catalog/gallery
+- Individual design cards
+- WhatsApp enquiry action
+
+Lights
+- Lighting catalog/gallery
+- Individual lighting cards
+- WhatsApp enquiry action
+
+Contact
+- Contact information
+- Location/service area
+- WhatsApp CTA
+- Other relevant contact methods
+
+14. WHATSAPP UX
+
+The primary customer journey is:
+
+Customer receives website
+→ Browses stage/light designs
+→ Finds an interesting design
+→ Clicks Enquire on WhatsApp
+→ WhatsApp opens with a pre-filled enquiry message
+
+Example message:
+
+"Hi, I'm interested in Wedding Stage 01. Could you please share the details and availability?"
+
+Each catalog item should ideally have a contextual WhatsApp enquiry action.
+
+15. COMPONENT PRINCIPLES
+
+Build reusable components instead of repeating UI.
+
+Recommended component categories:
+
+components/
+├── layout/
+├── sections/
+└── ui/
+
+Examples:
+- Header
+- Footer
+- MobileMenu
+- Hero
+- SectionHeading
+- StageCard
+- LightCard
+- WhatsAppButton
+- CTASection
+- Gallery
+- Button
+
+16. CONTENT ARCHITECTURE
+
+Keep catalog content data-driven even though the website has no database.
+
+Recommended:
+
+src/data/
+├── stages.ts
+└── lights.ts
+
+The UI components should consume these data files rather than hardcoding every item directly inside page JSX.
+
+This keeps the project easy to maintain and allows a future database/CMS/admin system to be introduced without rebuilding the UI architecture.
+
+17. DESIGN PRIORITY
+
+Priority order:
+
+1. Mobile usability
+2. Event photography quality
+3. Clear service presentation
+4. WhatsApp enquiry conversion
+5. Readability
+6. Performance
+7. SEO
+8. Visual polish
+
+The design should always prioritize the customer's ability to quickly understand the services and contact the business.
+
+18. CORE DESIGN PRINCIPLE
+
+"Let the event work speak for itself."
+
+Use the UI to frame and present the stage decoration and lighting work beautifully rather than competing with the photography.
