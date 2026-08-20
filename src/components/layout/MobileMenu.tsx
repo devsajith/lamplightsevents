@@ -67,20 +67,25 @@ export default function MobileMenu({
           Navigation
         </div>
         {navLinks.map((link) => {
-          const isActive = currentPath === link.href;
           return (
-            <Link
+            <a
               key={link.href}
               href={link.href}
-              onClick={onClose}
-              className={`font-serif text-2xl tracking-wide transition-colors ${
-                isActive
-                  ? "text-[#C9A45C] font-medium pl-2 border-l-2 border-[#C9A45C]"
-                  : "text-white/90 hover:text-white"
-              }`}
+              onClick={(e) => {
+                onClose();
+                if (link.href.startsWith("#")) {
+                  e.preventDefault();
+                  const targetId = link.href.replace("#", "");
+                  const element = document.getElementById(targetId);
+                  if (element) {
+                    element.scrollIntoView({ behavior: "smooth" });
+                  }
+                }
+              }}
+              className="font-serif text-2xl tracking-wide transition-colors text-white/90 hover:text-[#C9A45C] cursor-pointer"
             >
               {link.name}
-            </Link>
+            </a>
           );
         })}
       </div>
@@ -94,7 +99,7 @@ export default function MobileMenu({
         />
 
         <div className="text-center text-xs text-[#6B6B6B] space-y-1">
-          <p>{companyDetails.phone} • {companyDetails.email}</p>
+          <p>{companyDetails.phone}</p>
           <p>{companyDetails.cityState}</p>
         </div>
       </div>

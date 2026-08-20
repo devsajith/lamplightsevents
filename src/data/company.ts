@@ -30,19 +30,17 @@ export interface ProcessStep {
 export const companyDetails = {
   name: "Lamplights Events",
   tagline: "Bespoke Event Stage Decoration & Architectural Lighting",
-  phone: "+91 98765 43210",
-  whatsappNumber: "919876543210",
-  email: "inquiry@lamplightsevents.com",
-  address: "Grand Heritage Estate, 42 Event Avenue, Suite 100",
-  cityState: "Bengaluru, Karnataka 560001",
-  operatingHours: "Mon - Sat: 9:00 AM - 8:00 PM | Sun: By Appointment",
+  phone: "+91 90489 68531, +91 96569 39589",
+  whatsappNumber: "919656939589",
+  email: "",
+  address: "Irumpupalam, Adimali",
+  cityState: "Idukki, Kerala",
+  operatingHours: "",
   serviceAreas: [
-    "Bengaluru Urban & Rural",
-    "Mysuru & Heritage Belt",
-    "Hyderabad & Telangana",
-    "Chennai & Tamil Nadu",
-    "Goa Luxury Destination Weddings",
-    "Pan-India Luxury Venues"
+    "Munnar & Adimali High-Range Resorts",
+    "Idukki & Vagamon Plantation Venues",
+    "Kochi & Ernakulam Banquet Halls",
+    "All Destination Wedding Venues in Kerala"
   ],
   stats: [
     { label: "Bespoke Events Executed", value: "500+" },

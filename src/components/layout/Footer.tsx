@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { companyDetails } from "@/data/company";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
 
@@ -7,19 +8,18 @@ export default function Footer() {
   return (
     <footer className="bg-[#111111] text-white border-t border-[#C9A45C]/20 pt-16 pb-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
           {/* Brand Column */}
           <div className="space-y-4">
-            <Link href="/" className="inline-block">
-              <div className="flex items-center gap-2 mb-2">
-                <div className="w-8 h-8 rounded border border-[#C9A45C] flex items-center justify-center bg-[#C9A45C]/10 text-[#C9A45C]">
-                  <svg
-                    className="w-4 h-4 fill-current"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
-                  </svg>
+            <Link href="/" className="inline-block group">
+              <div className="flex items-center gap-3 mb-2">
+                <div className="relative w-9 h-9 rounded-full overflow-hidden border border-[#C9A45C]/60 bg-white flex items-center justify-center group-hover:border-[#C9A45C] transition-all shadow-sm flex-shrink-0">
+                  <Image
+                    src="/logo.jpg"
+                    alt="Lamplights Events Logo"
+                    fill
+                    className="object-cover scale-105"
+                  />
                 </div>
                 <span className="font-serif text-2xl font-bold tracking-widest uppercase">
                   LAMPLIGHTS
@@ -40,66 +40,60 @@ export default function Footer() {
           {/* Quick Links */}
           <div>
             <h4 className="font-serif text-lg font-semibold text-white mb-6 tracking-wide border-b border-[#C9A45C]/30 pb-2 inline-block">
-              Quick Links
+              Quick Navigation
             </h4>
             <ul className="space-y-3 text-sm text-[#6B6B6B]">
               <li>
-                <Link
-                  href="/"
-                  className="hover:text-[#C9A45C] transition-colors inline-block"
+                <a
+                  href="#home"
+                  className="hover:text-[#C9A45C] transition-colors inline-block cursor-pointer"
                 >
-                  Home Page
-                </Link>
+                  Home Top
+                </a>
               </li>
               <li>
-                <Link
-                  href="/stages"
-                  className="hover:text-[#C9A45C] transition-colors inline-block"
+                <a
+                  href="#services"
+                  className="hover:text-[#C9A45C] transition-colors inline-block cursor-pointer"
+                >
+                  What We Do
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#stages"
+                  className="hover:text-[#C9A45C] transition-colors inline-block cursor-pointer"
                 >
                   Stage Design Catalog
-                </Link>
+                </a>
               </li>
               <li>
-                <Link
-                  href="/lights"
-                  className="hover:text-[#C9A45C] transition-colors inline-block"
+                <a
+                  href="#lights"
+                  className="hover:text-[#C9A45C] transition-colors inline-block cursor-pointer"
                 >
                   Event Lighting Catalog
-                </Link>
+                </a>
               </li>
               <li>
-                <Link
-                  href="/about"
-                  className="hover:text-[#C9A45C] transition-colors inline-block"
+                <a
+                  href="#about"
+                  className="hover:text-[#C9A45C] transition-colors inline-block cursor-pointer"
                 >
                   About Our Craftsmanship
-                </Link>
+                </a>
               </li>
               <li>
-                <Link
-                  href="/contact"
-                  className="hover:text-[#C9A45C] transition-colors inline-block"
+                <a
+                  href="#contact"
+                  className="hover:text-[#C9A45C] transition-colors inline-block cursor-pointer"
                 >
-                  Contact & Bookings
-                </Link>
+                  Contact & Booking
+                </a>
               </li>
             </ul>
           </div>
 
-          {/* Service Areas */}
-          <div>
-            <h4 className="font-serif text-lg font-semibold text-white mb-6 tracking-wide border-b border-[#C9A45C]/30 pb-2 inline-block">
-              Service Regions
-            </h4>
-            <ul className="space-y-2.5 text-sm text-[#6B6B6B]">
-              {companyDetails.serviceAreas.map((area, idx) => (
-                <li key={idx} className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#C9A45C]" />
-                  <span>{area}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
 
           {/* Contact & Hours */}
           <div>
@@ -158,27 +152,6 @@ export default function Footer() {
                   {companyDetails.phone}
                 </a>
               </li>
-              <li className="flex items-center gap-3">
-                <svg
-                  className="w-5 h-5 text-[#C9A45C] flex-shrink-0"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={1.5}
-                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                  />
-                </svg>
-                <a
-                  href={`mailto:${companyDetails.email}`}
-                  className="hover:text-white transition-colors"
-                >
-                  {companyDetails.email}
-                </a>
-              </li>
             </ul>
           </div>
         </div>
@@ -189,7 +162,7 @@ export default function Footer() {
           <div className="flex items-center space-x-6">
             <span>Luxury Stage Decoration</span>
             <span>Architectural Lighting</span>
-            <span>Goa & Pan-India</span>
+            <span>Idukki & Kerala</span>
           </div>
         </div>
       </div>

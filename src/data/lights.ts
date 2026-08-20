@@ -34,11 +34,8 @@ export const lightsData: LightOption[] = [
       control: "Wireless DMX / Static Presets"
     },
     featured: true,
-    imageUrl: "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?q=80&w=1200&auto=format&fit=crop",
-    galleryUrls: [
-      "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1508997449629-303059a039c0?q=80&w=1200&auto=format&fit=crop"
-    ],
+    imageUrl: "/images/lights/evlight1.webp",
+    galleryUrls: ["/images/lights/evlight1.webp"],
     keyFeatures: [
       "IP65 Weatherproof Aluminum Enclosure",
       "Soft Amber & Champagne Gold Color Palette",
@@ -62,11 +59,8 @@ export const lightsData: LightOption[] = [
       control: "32-Channel DMX 512 / ArtNet"
     },
     featured: true,
-    imageUrl: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?q=80&w=1200&auto=format&fit=crop",
-    galleryUrls: [
-      "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=1200&auto=format&fit=crop"
-    ],
+    imageUrl: "/images/lights/evlight2.webp",
+    galleryUrls: ["/images/lights/evlight2.webp"],
     keyFeatures: [
       "14 Static + 9 Rotating Custom Gobos",
       "8-Facet Rotating Circular & Linear Prism",
@@ -90,11 +84,8 @@ export const lightsData: LightOption[] = [
       control: "Dimmer Console / Twinkle FX Controller"
     },
     featured: true,
-    imageUrl: "https://images.unsplash.com/photo-1508997449629-303059a039c0?q=80&w=1200&auto=format&fit=crop",
-    galleryUrls: [
-      "https://images.unsplash.com/photo-1508997449629-303059a039c0?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1544078751-58fee2d8a03b?q=80&w=1200&auto=format&fit=crop"
-    ],
+    imageUrl: "/images/lights/evlight3.webp",
+    galleryUrls: ["/images/lights/evlight3.webp"],
     keyFeatures: [
       "Commercial Grade Heavy-Duty Wiring",
       "Flicker-Free Smooth 0-100% Dimming",
@@ -118,10 +109,8 @@ export const lightsData: LightOption[] = [
       control: "Smooth DMX Triac Dimming"
     },
     featured: true,
-    imageUrl: "https://images.unsplash.com/photo-1543198126-a8ad8e47fb22?q=80&w=1200&auto=format&fit=crop",
-    galleryUrls: [
-      "https://images.unsplash.com/photo-1543198126-a8ad8e47fb22?q=80&w=1200&auto=format&fit=crop"
-    ],
+    imageUrl: "/images/lights/evlight4.webp",
+    galleryUrls: ["/images/lights/evlight4.webp"],
     keyFeatures: [
       "Genuine K9 Faceted Optical Crystal",
       "Brushed Warm Brass Metallic Frame",
@@ -144,11 +133,9 @@ export const lightsData: LightOption[] = [
       coverage: "Sharp 3° Pinpoint Beam",
       control: "Wireless Remote / Magnetic Base"
     },
-    featured: false,
-    imageUrl: "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1200&auto=format&fit=crop",
-    galleryUrls: [
-      "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1200&auto=format&fit=crop"
-    ],
+    featured: true,
+    imageUrl: "/images/lights/evlight5.webp",
+    galleryUrls: ["/images/lights/evlight5.webp"],
     keyFeatures: [
       "100% Cordless Battery Powered (10hr Runtime)",
       "Ultra-Strong Magnetic Mount for Truss/Pillars",
@@ -157,87 +144,6 @@ export const lightsData: LightOption[] = [
     ],
     recommendedUse: "Banquet Table Centerpieces, Cake Tables & Photo Booth Backdrops",
     powerRequirements: "Rechargeable Lithium Battery"
-  },
-  {
-    id: "vintage-edison-filament",
-    code: "LGT-06",
-    title: "Vintage Filament Edison Festoon",
-    category: "Ambient & Fairy Lights",
-    shortDescription: "Suspended amber glass Edison bulbs strung along braided black vintage cables.",
-    description: "Adds a charming rustic-chic and cozy glow to outdoor lawns, beachside weddings, and lounge bar areas.",
-    specs: {
-      output: "ST64 Warm Amber Edison Bulbs",
-      colorTemp: "2200K Vintage Warm Amber",
-      coverage: "Strands of 20m / 50m / 100m",
-      control: "Rotary Rotary Dimmer Console"
-    },
-    featured: false,
-    imageUrl: "https://images.unsplash.com/photo-1527529482837-4698179dc6ce?q=80&w=1200&auto=format&fit=crop",
-    galleryUrls: [
-      "https://images.unsplash.com/photo-1527529482837-4698179dc6ce?q=80&w=1200&auto=format&fit=crop"
-    ],
-    keyFeatures: [
-      "Shatter-Resistant Amber Polycarbonate Bulbs",
-      "Heavy-Duty Weatherproof Rubber Cable",
-      "Subtle Spiraled Filament Visual Pattern",
-      "Warm Golden Lounge Atmosphere"
-    ],
-    recommendedUse: "Cocktail Lounges, Food Station Canopies & Beach Lawns",
-    powerRequirements: "220V AC / 4W per bulb"
-  },
-  {
-    id: "black-truss-box-rigging",
-    code: "LGT-07",
-    title: "Black Matte Box Truss Structure",
-    category: "Stage Truss & Rigging",
-    shortDescription: "Certified heavy-duty aluminum F34 square truss system with stealth black powder coating.",
-    description: "The structural foundation for grand stages, lighting grids, and LED screens. Powder-coated in sleek matte black for a clean minimal visual look.",
-    specs: {
-      output: "SWL Up to 1,500 kg Span Load",
-      colorTemp: "Matte Black Stealth Coating",
-      coverage: "Custom Spans up to 80ft Width",
-      control: "Motorized Electric Chain Hoists"
-    },
-    featured: false,
-    imageUrl: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=1200&auto=format&fit=crop",
-    galleryUrls: [
-      "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=1200&auto=format&fit=crop"
-    ],
-    keyFeatures: [
-      "TUV Certified Heavy-Duty Aluminum Alloy",
-      "Stealth Powder-Coated Finish (Non-Reflective)",
-      "Integrated Cable Management Trailing",
-      "Base Plates & Ground Support Towers"
-    ],
-    recommendedUse: "Concert Stages, Heavy Chandelier Suspensions & LED Screen Support",
-    powerRequirements: "Mechanical Rigging System"
-  },
-  {
-    id: "low-fog-haze-atmosphere",
-    code: "LGT-08",
-    title: "Low-Lying Fog & Stage Haze Systems",
-    category: "Intelligent Moving Heads",
-    shortDescription: "Ultrasonic water-based low fog generator creating dry-ice cloud effects for first dances.",
-    description: "Creates an ethereal 'dancing on clouds' low-lying white fog effect that stays hugging the stage floor without tripping fire alarms or clouding guest views.",
-    specs: {
-      output: "Continuous Low-Lying Dense Cloud",
-      colorTemp: "Pure White Non-Toxic Water-Based Haze",
-      coverage: "Covers 2,000 sq ft Stage in 30 Seconds",
-      control: "DMX Remote Trigger"
-    },
-    featured: true,
-    imageUrl: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?q=80&w=1200&auto=format&fit=crop",
-    galleryUrls: [
-      "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?q=80&w=1200&auto=format&fit=crop"
-    ],
-    keyFeatures: [
-      "Uses Pure Water & Fluid (No Odor or Residue)",
-      "Stays Below Knee Level for Crisp Floor Coverage",
-      "Completely Residue-Free for Evening Gowns",
-      "Fast Reheat & Continuous Output"
-    ],
-    recommendedUse: "Couples First Dance, Grand Entries & Stage Performance Cues",
-    powerRequirements: "220V AC / 2200W"
   }
 ];
 
@@ -246,6 +152,5 @@ export const lightCategories = [
   "Architectural Wash",
   "Intelligent Moving Heads",
   "Ambient & Fairy Lights",
-  "Luxury Chandeliers",
-  "Stage Truss & Rigging"
+  "Luxury Chandeliers"
 ];

@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
-import Link from "next/link";
+import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import HeroSection from "@/components/sections/HeroSection";
 import SectionHeading from "@/components/ui/SectionHeading";
 import StageCard from "@/components/sections/StageCard";
@@ -11,232 +11,447 @@ import Modal from "@/components/ui/Modal";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
 import { stagesData, StageDesign } from "@/data/stages";
 import { lightsData, LightOption } from "@/data/lights";
-import { servicesList, trustHighlights, testimonialsList } from "@/data/company";
+import {
+  companyDetails,
+  servicesList,
+  trustHighlights,
+  testimonialsList,
+  processSteps,
+} from "@/data/company";
 
-export default function HomePage() {
+export default function SinglePageApp() {
+  // Modal states
   const [selectedStage, setSelectedStage] = useState<StageDesign | null>(null);
   const [selectedLight, setSelectedLight] = useState<LightOption | null>(null);
 
-  const featuredStages = stagesData.filter((s) => s.featured).slice(0, 3);
-  const featuredLights = lightsData.filter((l) => l.featured).slice(0, 3);
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("reveal-visible");
+          }
+        });
+      },
+      { threshold: 0.05 }
+    );
+
+    const elements = document.querySelectorAll(".reveal");
+    elements.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Contact form state
+  const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
+    eventDate: "",
+    eventType: "Wedding Mandap & Stage",
+    venueCity: "",
+    guestCount: "",
+    message: "",
+  });
+
+
+  // Handle WhatsApp Contact Form Submit
+  const handleSubmitWhatsApp = (e: React.FormEvent) => {
+    e.preventDefault();
+    const payload = `Hi Lamplights Events!
+
+Name: ${formData.name || "Not specified"}
+Phone: ${formData.phone || "Not specified"}
+Event Date: ${formData.eventDate || "Not specified"}
+Service Required: ${formData.eventType}
+Venue / City: ${formData.venueCity || "Not specified"}`;
+
+    const url = `https://wa.me/${companyDetails.whatsappNumber}?text=${encodeURIComponent(payload)}`;
+    window.open(url, "_blank");
+  };
 
   return (
-    <div className="space-y-0">
-      {/* 1. Hero Section */}
-      <HeroSection />
-
-      {/* 2. Featured Stage Designs Section */}
-      <section className="py-20 bg-[#FAF9F6]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeading
-            badge="Curated Showcase"
-            title="Featured Stage Architecture"
-            subtitle="Explore our most celebrated wedding mandaps, reception backdrops, and floral stage setups."
-          />
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
-            {featuredStages.map((stage) => (
-              <StageCard
-                key={stage.id}
-                stage={stage}
-                onOpenModal={(stg) => setSelectedStage(stg)}
-              />
-            ))}
-          </div>
-
-          <div className="mt-12 text-center">
-            <Link
-              href="/stages"
-              className="inline-flex items-center justify-center px-8 py-3.5 border border-[#111111] text-[#111111] font-medium text-sm rounded-[6px] hover:bg-[#111111] hover:text-white transition-all group"
-            >
-              <span>View All Stage Designs ({stagesData.length})</span>
-              <svg
-                className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M14 5l7 7m0 0l-7 7m7-7H3"
-                />
-              </svg>
-            </Link>
-          </div>
-        </div>
+    <div className="space-y-0 min-h-screen bg-[#FAF9F6] text-[#171717]">
+      {/* 1. HERO SECTION */}
+      <section id="home" className="scroll-mt-20">
+        <HeroSection />
       </section>
 
-      {/* 3. Featured Lighting Section */}
-      <section className="py-20 bg-[#FFFFFF] border-y border-[#E8E5DF]">
+      {/* 2. WHAT WE DO / SERVICES OVERVIEW */}
+      <section id="services" className="py-20 bg-[#FFFFFF] border-b border-[#E8E5DF] scroll-mt-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
-            badge="Atmospheric Artistry"
-            title="Signature Event Lighting"
-            subtitle="From warm gold architectural washes to intelligent stage moving profiles and luxury chandeliers."
-          />
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
-            {featuredLights.map((light) => (
-              <LightCard
-                key={light.id}
-                light={light}
-                onOpenModal={(lgt) => setSelectedLight(lgt)}
-              />
-            ))}
-          </div>
-
-          <div className="mt-12 text-center">
-            <Link
-              href="/lights"
-              className="inline-flex items-center justify-center px-8 py-3.5 border border-[#111111] text-[#111111] font-medium text-sm rounded-[6px] hover:bg-[#111111] hover:text-white transition-all group"
-            >
-              <span>View All Lighting Options ({lightsData.length})</span>
-              <svg
-                className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M14 5l7 7m0 0l-7 7m7-7H3"
-                />
-              </svg>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* 4. Services Overview Section */}
-      <section className="py-20 bg-[#FAF9F6]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeading
-            badge="Full-Scale Production"
-            title="Our Core Specializations"
-            subtitle="Turnkey design, fabrication, rigging, and lighting engineering under one master production team."
-          />
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
-            {servicesList.map((service) => (
-              <div
-                key={service.id}
-                className="bg-white p-8 rounded-lg border border-[#E8E5DF] hover:border-[#C9A45C] transition-all space-y-4 shadow-sm"
-              >
-                <div className="w-12 h-12 rounded-md bg-[#FAF9F6] border border-[#C9A45C]/40 flex items-center justify-center text-[#C9A45C]">
-                  <svg
-                    className="w-6 h-6 fill-current"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
-                  </svg>
-                </div>
-                <h3 className="font-serif text-2xl text-[#111111] font-normal">
-                  {service.title}
-                </h3>
-                <p className="text-sm text-[#6B6B6B] leading-relaxed">
-                  {service.fullDesc}
-                </p>
-
-                <ul className="pt-2 space-y-2 text-xs text-[#171717]">
-                  {service.features.map((feat, idx) => (
-                    <li key={idx} className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#C9A45C]" />
-                      <span className="font-medium">{feat}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 5. Why Choose Us Section */}
-      <section className="py-20 bg-[#111111] text-white border-y border-[#C9A45C]/20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeading
-            dark
-            badge="The Lamplights Standard"
-            title="Why Discerning Hosts Trust Us"
-            subtitle="Built on structural safety, design originality, and zero-compromise live technical support."
-          />
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
-            {trustHighlights.map((trust, idx) => (
-              <div
-                key={idx}
-                className="bg-[#171717] p-6 rounded-lg border border-white/10 hover:border-[#C9A45C] transition-colors space-y-3"
-              >
-                <div className="text-[#C9A45C] font-serif text-3xl font-bold">
-                  0{idx + 1}
-                </div>
-                <h4 className="font-serif text-lg font-normal text-white">
-                  {trust.title}
-                </h4>
-                <p className="text-xs text-[#E8E5DF]/70 leading-relaxed">
-                  {trust.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 6. Testimonials Section */}
-      <section className="py-20 bg-[#FAF9F6]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeading
-            badge="Client Voices"
-            title="Stories of Unforgettable Nights"
-            subtitle="Hear how our stage decoration and lighting transformed high-profile celebrations."
+            badge="What We Do"
+            title="Our Services Made Simple"
+            subtitle="Whether you are planning a grand wedding, a reception party, or an outdoor sangeet, we take care of stage decoration and event lighting from start to finish."
           />
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
-            {testimonialsList.map((item) => (
-              <div
-                key={item.id}
-                className="bg-white p-8 rounded-lg border border-[#E8E5DF] flex flex-col justify-between space-y-6 shadow-sm"
-              >
-                <div className="space-y-4">
-                  {/* Rating Stars */}
-                  <div className="flex items-center gap-1 text-[#C9A45C]">
-                    {[...Array(item.rating)].map((_, i) => (
-                      <svg
-                        key={i}
-                        className="w-4 h-4 fill-current"
-                        viewBox="0 0 24 24"
-                      >
-                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-                      </svg>
-                    ))}
-                  </div>
-                  <p className="text-sm text-[#171717] italic leading-relaxed">
-                    &ldquo;{item.quote}&rdquo;
-                  </p>
-                </div>
-
-                <div className="border-t border-[#E8E5DF] pt-4">
-                  <p className="font-serif text-base font-medium text-[#111111]">
-                    {item.clientName}
-                  </p>
-                  <p className="text-xs text-[#6B6B6B]">{item.eventTitle}</p>
-                  <p className="text-[11px] text-[#C9A45C] font-medium mt-0.5">
-                    {item.venue}
-                  </p>
-                </div>
+            {/* Card 1: Stage Decoration */}
+            <div className="reveal bg-[#FAF9F6] p-8 rounded-xl border border-[#E8E5DF] hover:border-[#C9A45C] transition-all space-y-4 shadow-sm group">
+              <div className="w-12 h-12 rounded-lg bg-white border border-[#E8E5DF] flex items-center justify-center text-2xl group-hover:scale-105 transition-transform">
+                💐
               </div>
-            ))}
+              <h3 className="font-serif text-2xl text-[#111111] font-medium">
+                Stage & Mandap Decoration
+              </h3>
+              <p className="text-sm text-[#6B6B6B] leading-relaxed">
+                Custom wedding mandaps, reception backdrops, floral arches, entrance gates, and stage sofas designed to fit your venue perfectly.
+              </p>
+              <ul className="pt-2 space-y-2 text-xs text-[#171717]">
+                <li className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#C9A45C]" />
+                  <span>Fresh & Exotic Flower Backdrops</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#C9A45C]" />
+                  <span>Traditional Royal Mandaps & Pillars</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#C9A45C]" />
+                  <span>Modern Geometric & Glasshouse Stages</span>
+                </li>
+              </ul>
+              <div className="pt-2">
+                <a
+                  href="#stages"
+                  className="text-xs font-semibold text-[#C9A45C] hover:underline inline-flex items-center gap-1 cursor-pointer"
+                >
+                  <span>Explore Stage Catalog ({stagesData.length} Designs)</span>
+                  <span>&rarr;</span>
+                </a>
+              </div>
+            </div>
+
+            {/* Card 2: Event Lighting */}
+            <div className="reveal delay-100 bg-[#FAF9F6] p-8 rounded-xl border border-[#E8E5DF] hover:border-[#C9A45C] transition-all space-y-4 shadow-sm group">
+              <div className="w-12 h-12 rounded-lg bg-white border border-[#E8E5DF] flex items-center justify-center text-2xl group-hover:scale-105 transition-transform">
+                💡
+              </div>
+              <h3 className="font-serif text-2xl text-[#111111] font-medium">
+                Professional Event Lighting
+              </h3>
+              <p className="text-sm text-[#6B6B6B] leading-relaxed">
+                Transform halls and lawn venues with warm golden ambient lights, fairy light ceilings, stage spotlights, and crystal chandeliers.
+              </p>
+              <ul className="pt-2 space-y-2 text-xs text-[#171717]">
+                <li className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#C9A45C]" />
+                  <span>Warm Golden Venue Uplighters</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#C9A45C]" />
+                  <span>Starry Night Fairy Light Canopies</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#C9A45C]" />
+                  <span>Stage Moving Head Spotlights & Beams</span>
+                </li>
+              </ul>
+              <div className="pt-2">
+                <a
+                  href="#lights"
+                  className="text-xs font-semibold text-[#C9A45C] hover:underline inline-flex items-center gap-1 cursor-pointer"
+                >
+                  <span>Explore Lighting Options ({lightsData.length} Options)</span>
+                  <span>&rarr;</span>
+                </a>
+              </div>
+            </div>
+
+            {/* Card 3: Complete Turnkey Setup */}
+            <div className="reveal delay-200 bg-[#FAF9F6] p-8 rounded-xl border border-[#E8E5DF] hover:border-[#C9A45C] transition-all space-y-4 shadow-sm group">
+              <div className="w-12 h-12 rounded-lg bg-white border border-[#E8E5DF] flex items-center justify-center text-2xl group-hover:scale-105 transition-transform">
+                🛠️
+              </div>
+              <h3 className="font-serif text-2xl text-[#111111] font-medium">
+                Full Setup & Support
+              </h3>
+              <p className="text-sm text-[#6B6B6B] leading-relaxed">
+                Our team handles transport, structural setup, wiring, live lighting control during your event, and hassle-free cleanup afterward.
+              </p>
+              <ul className="pt-2 space-y-2 text-xs text-[#171717]">
+                <li className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#C9A45C]" />
+                  <span>Certified Heavy-Duty Stage Rigging</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#C9A45C]" />
+                  <span>On-Site Lighting Technicians</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#C9A45C]" />
+                  <span>Quick Post-Event Dismantling</span>
+                </li>
+              </ul>
+              <div className="pt-2">
+                <a
+                  href="#contact"
+                  className="text-xs font-semibold text-[#C9A45C] hover:underline inline-flex items-center gap-1 cursor-pointer"
+                >
+                  <span>Get Quick Quote & Contact</span>
+                  <span>&rarr;</span>
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* 7. WhatsApp CTA Section */}
-      <CTASection />
+      {/* 3. STAGE DESIGN CATALOG SECTION */}
+      <section id="stages" className="py-20 bg-[#FAF9F6] border-b border-[#E8E5DF] scroll-mt-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionHeading
+            badge="Stage Catalog"
+            title="Stage & Mandap Designs"
+            subtitle="Browse our collection of wedding mandaps, reception backdrops, and floral stage setups."
+          />
+
+          {/* Stage Grid */}
+          <div className="reveal mt-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {stagesData.map((stage) => (
+                <StageCard
+                  key={stage.id}
+                  stage={stage}
+                  onOpenModal={(stg) => setSelectedStage(stg)}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. EVENT LIGHTING CATALOG SECTION */}
+      <section id="lights" className="py-20 bg-[#FFFFFF] border-b border-[#E8E5DF] scroll-mt-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionHeading
+            badge="Lighting Catalog"
+            title="Event Lighting Options"
+            subtitle="Explore warm ambient lights, stage spotlights, fairy light canopies, and crystal chandeliers."
+          />
+
+          {/* Lighting Grid */}
+          <div className="reveal mt-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {lightsData.map((light) => (
+                <LightCard
+                  key={light.id}
+                  light={light}
+                  onOpenModal={(lgt) => setSelectedLight(lgt)}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 5. ABOUT US & PROCESS SECTION */}
+      <section id="about" className="py-20 bg-[#FAF9F6] border-b border-[#E8E5DF] scroll-mt-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+          <SectionHeading
+            badge="About Us"
+            title="Over a Decade of Stage Craftsmanship"
+            subtitle="We design and set up custom wedding stages, mandaps, floral backdrops, and professional event lights across Kerala."
+          />
+
+          {/* Story Narrative */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center bg-white p-8 sm:p-12 rounded-xl border border-[#E8E5DF] shadow-sm">
+            <div className="reveal space-y-6">
+              <span className="text-xs font-semibold uppercase tracking-widest text-[#C9A45C]">
+                Based in Adimali, Idukki
+              </span>
+              <h3 className="font-serif text-3xl sm:text-4xl text-[#111111] font-medium leading-tight">
+                Crafting spatial memories illuminated in warm golden light.
+              </h3>
+              <p className="text-sm sm:text-base text-[#6B6B6B] leading-relaxed">
+                {companyDetails.name} began with a simple goal: to make stage decoration and event lighting seamless, safe, and breathtaking for every wedding and celebration in the high-range region.
+              </p>
+              <p className="text-sm sm:text-base text-[#6B6B6B] leading-relaxed">
+                Whether designing a traditional floral mandap, a rustic outdoor lawn stage in Munnar, or warm ambient fairy light canopies for estate resort weddings across Idukki and Kerala, our master craftsmen and lighting technicians ensure complete peace of mind.
+              </p>
+
+            </div>
+
+            <div className="reveal delay-200 relative aspect-[4/3] w-full rounded-xl overflow-hidden border border-[#C9A45C]/30 shadow-md">
+              <Image
+                src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1200&auto=format&fit=crop"
+                alt="Lamplights Events Stage Craftsmanship"
+                fill
+                className="object-cover"
+              />
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+
+      {/* 7. CONTACT & FAQ SECTION */}
+      <section id="contact" className="py-20 bg-[#FAF9F6] scroll-mt-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+          <SectionHeading
+            badge="Get In Touch"
+            title="Contact Us for Booking & Price Quotes"
+            subtitle="Fill in your event details below to send us an instant WhatsApp message, or call us directly."
+          />
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+            {/* Form Column */}
+            <div className="reveal lg:col-span-7 bg-white p-8 sm:p-10 rounded-xl border border-[#E8E5DF] shadow-sm space-y-6">
+              <div className="border-b border-[#E8E5DF] pb-4">
+                <h3 className="font-serif text-2xl font-medium text-[#111111]">
+                  Send Inquiry on WhatsApp
+                </h3>
+                <p className="text-xs text-[#6B6B6B] mt-1">
+                  Enter your event details to generate a pre-formatted WhatsApp message instantly.
+                </p>
+              </div>
+
+              <form onSubmit={handleSubmitWhatsApp} className="space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-semibold text-[#111111] uppercase tracking-wider mb-1">
+                      Your Name *
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="e.g. Ananya Sharma"
+                      value={formData.name}
+                      onChange={(e) =>
+                        setFormData({ ...formData, name: e.target.value })
+                      }
+                      className="w-full px-4 py-2.5 text-sm bg-[#FAF9F6] border border-[#E8E5DF] rounded-[6px] focus:outline-none focus:border-[#C9A45C]"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-semibold text-[#111111] uppercase tracking-wider mb-1">
+                      Phone Number *
+                    </label>
+                    <input
+                      type="tel"
+                      required
+                      placeholder="e.g. +91 98765 43210"
+                      value={formData.phone}
+                      onChange={(e) =>
+                        setFormData({ ...formData, phone: e.target.value })
+                      }
+                      className="w-full px-4 py-2.5 text-sm bg-[#FAF9F6] border border-[#E8E5DF] rounded-[6px] focus:outline-none focus:border-[#C9A45C]"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-semibold text-[#111111] uppercase tracking-wider mb-1">
+                      Event Date
+                    </label>
+                    <input
+                      type="date"
+                      value={formData.eventDate}
+                      onChange={(e) =>
+                        setFormData({ ...formData, eventDate: e.target.value })
+                      }
+                      className="w-full px-4 py-2.5 text-sm bg-[#FAF9F6] border border-[#E8E5DF] rounded-[6px] focus:outline-none focus:border-[#C9A45C]"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-semibold text-[#111111] uppercase tracking-wider mb-1">
+                      Service Needed
+                    </label>
+                    <select
+                      value={formData.eventType}
+                      onChange={(e) =>
+                        setFormData({ ...formData, eventType: e.target.value })
+                      }
+                      className="w-full px-4 py-2.5 text-sm bg-[#FAF9F6] border border-[#E8E5DF] rounded-[6px] focus:outline-none focus:border-[#C9A45C]"
+                    >
+                      <option>Wedding Stage & Mandap</option>
+                      <option>Reception Stage Backdrop</option>
+                      <option>Event & Ambient Lighting</option>
+                      <option>Stage Spotlights & Rigging</option>
+                      <option>Full Stage & Lighting Package</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-semibold text-[#111111] uppercase tracking-wider mb-1">
+                    Venue Location / City
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="e.g. Leela Palace, Bengaluru"
+                    value={formData.venueCity}
+                    onChange={(e) =>
+                      setFormData({ ...formData, venueCity: e.target.value })
+                    }
+                    className="w-full px-4 py-2.5 text-sm bg-[#FAF9F6] border border-[#E8E5DF] rounded-[6px] focus:outline-none focus:border-[#C9A45C]"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full py-3.5 bg-[#25D366] hover:bg-[#20BD5A] text-white font-medium text-base rounded-[6px] transition-all flex items-center justify-center space-x-2 shadow"
+                >
+                  <svg
+                    className="w-5 h-5 fill-current"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984 0 1.762.459 3.48 1.332 5.001L2 22l5.148-1.348c1.472.802 3.134 1.222 4.86 1.224h.004c5.505 0 9.988-4.478 9.989-9.985 0-2.668-1.039-5.176-2.925-7.062A9.923 9.923 0 0 0 12.012 2zm5.82 14.286c-.244.688-1.42 1.314-1.96 1.37-.502.053-1.15.074-1.85-.15-.434-.138-1-.322-1.742-.644-3.072-1.333-5.074-4.46-5.228-4.664-.153-.205-1.254-1.67-1.254-3.18 0-1.51.79-2.253 1.07-2.54.28-.288.612-.36.816-.36.204 0 .408.002.586.01.19.008.444-.072.695.53.255.612.868 2.116.944 2.27.077.153.128.332.026.536-.102.204-.153.332-.306.51-.153.18-.32.404-.457.542-.153.153-.312.32-.134.626.178.306.79 1.305 1.696 2.112 1.164 1.038 2.146 1.36 2.452 1.513.306.153.485.128.664-.076.178-.204.765-.893.97-1.199.204-.306.408-.255.688-.153.28.102 1.785.842 2.091.995.306.153.51.23.586.357.077.128.077.74-.167 1.428z" />
+                  </svg>
+                  <span>Send Request Directly to WhatsApp</span>
+                </button>
+              </form>
+            </div>
+
+            {/* Information Column */}
+            <div className="reveal delay-200 lg:col-span-5 space-y-6">
+              <div className="bg-[#111111] text-white p-8 rounded-xl border border-[#C9A45C]/30 space-y-6 shadow-md">
+                <h4 className="font-serif text-2xl font-medium border-b border-white/10 pb-3">
+                  Direct Contact Info
+                </h4>
+
+                <div className="space-y-4 text-sm text-[#E8E5DF]">
+                  <div>
+                    <p className="text-xs uppercase tracking-wider text-[#C9A45C] font-semibold">
+                      Main Office & Studio
+                    </p>
+                    <p className="mt-1 font-medium">{companyDetails.address}</p>
+                    <p className="text-xs text-[#A1A1AA]">{companyDetails.cityState}</p>
+                  </div>
+
+                  <div>
+                    <p className="text-xs uppercase tracking-wider text-[#C9A45C] font-semibold">
+                      Phone & WhatsApp
+                    </p>
+                    <p className="mt-1 font-medium">{companyDetails.phone}</p>
+                  </div>
+
+                </div>
+
+                <div className="pt-2">
+                  <WhatsAppButton
+                    fullWidth
+                    size="md"
+                    label="Chat Live on WhatsApp"
+                  />
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* 8. CTA BANNER SECTION */}
+      <section id="cta" className="scroll-mt-20">
+        <CTASection />
+      </section>
 
       {/* Stage Detail Lightbox Modal */}
       {selectedStage && (
@@ -270,7 +485,7 @@ export default function HomePage() {
 
             <div className="bg-[#FAF9F6] p-4 rounded-md border border-[#E8E5DF] space-y-2">
               <h4 className="font-serif text-sm font-semibold text-[#111111]">
-                Key Architectural Highlights:
+                Key Highlights:
               </h4>
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-[#6B6B6B]">
                 {selectedStage.keyHighlights.map((hl, idx) => (
@@ -332,19 +547,27 @@ export default function HomePage() {
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-[#FAF9F6] p-4 rounded-md border border-[#E8E5DF] text-xs">
               <div>
                 <span className="text-[#6B6B6B] block">Light Output</span>
-                <span className="font-semibold text-[#111111]">{selectedLight.specs.output}</span>
+                <span className="font-semibold text-[#111111]">
+                  {selectedLight.specs.output}
+                </span>
               </div>
               <div>
                 <span className="text-[#6B6B6B] block">Color Temp</span>
-                <span className="font-semibold text-[#111111]">{selectedLight.specs.colorTemp}</span>
+                <span className="font-semibold text-[#111111]">
+                  {selectedLight.specs.colorTemp}
+                </span>
               </div>
               <div>
                 <span className="text-[#6B6B6B] block">Coverage</span>
-                <span className="font-semibold text-[#111111]">{selectedLight.specs.coverage}</span>
+                <span className="font-semibold text-[#111111]">
+                  {selectedLight.specs.coverage}
+                </span>
               </div>
               <div>
                 <span className="text-[#6B6B6B] block">Control</span>
-                <span className="font-semibold text-[#111111]">{selectedLight.specs.control}</span>
+                <span className="font-semibold text-[#111111]">
+                  {selectedLight.specs.control}
+                </span>
               </div>
             </div>
 

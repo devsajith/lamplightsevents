@@ -31,6 +31,11 @@ export const metadata: Metadata = {
     "Bengaluru Wedding Stages",
     "Goa Destination Weddings",
   ],
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/logo.jpg",
+  },
 };
 
 export default function RootLayout({
